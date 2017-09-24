@@ -1,0 +1,27 @@
+{
+  "name": "Your forks",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Show your forks of GitHub projects.",
+  "homepage_url": "https://github.com/cg-cnu/your-forks.git",
+  "icons": {
+    "128": "webext/icons/your_forks_128.png"
+  },
+  "permissions": [
+    "*://github.com/*",
+    "*://api.github.com/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/*"
+      ],
+      "js": [
+        "webext/data/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}
