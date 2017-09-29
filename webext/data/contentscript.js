@@ -78,6 +78,7 @@ const [ , user, repo] = window.location.pathname.split('/');
 
 if (user, repo) {
     // TODO: get the current user ?
+    // take input from the user in the ui ?
     viewer = 'cg-cnu';
 
     if (user !== viewer){

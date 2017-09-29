@@ -7,6 +7,9 @@
   "icons": {
     "128": "webext/icons/your_forks_128.png"
   },
+  "browser_action": {
+    "default_icon": "webext/icons/your_forks_128.png"
+  },
   "permissions": [
     "*://github.com/*",
     "*://api.github.com/*",

@@ -6,11 +6,11 @@
 
 ### Description:
 
-A chrome addon to display the link to your fork on the parent repo. 
+A chrome addon to display the link to your fork on the parent repo in github. 
 
 ### Issue/Feedback:
 
-log them in the [github issues](https://github.com/cg-cnu/blender-wireframe-on-shaded/issues) or hit me on [twitter](https://twitter.com/CgCnu).
+log them in the [github issues](https://github.com/cg-cnu/your-forks/issues) or hit me on [twitter](https://twitter.com/CgCnu).
 
 ### Like it?:
 
