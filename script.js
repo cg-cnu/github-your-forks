@@ -30,17 +30,17 @@ function getForksElement(text) {
 }
 
 function emptyElem(elem) {
-    elem.textContent = ''; // How jQuery does it
+    elem.textContent = '';
 }
 
 function showDetails(user, repo, text) {
 
-    const forkA = document.createElement('a');
+    const yourFork = document.createElement('a');
 
-    forkA.href = `https://github.com/${user}/${repo}/`;
-    forkA.append(`${user}/${repo}`);
+    yourFork.href = `https://github.com/${user}/${repo}/`;
+    yourFork.append(`${user}/${repo}`);
 
-    text.append('forked to ', forkA )
+    text.append('forked to ', yourFork )
 
 }
 
@@ -48,23 +48,19 @@ function safeUpdateDOM(user, repo) {
 
     // Get the stored version or create it if it doesn't exist
     const text = getForksElement();
-    // console.log(text);
     emptyElem(text);
     showDetails(user, repo, text)
-    console.log(text);
-    // action(text);
-
 }
 
-async function runFor(user, repo) {
+async function getForks(user, repo) {
     try {
         const url = `https://github.com/${user}/${repo}/`
         response = await fetch(url)
         if (response.status !== 200){
             return console.warn('Looks like something is wrong.');
         }
+        // update dom
         safeUpdateDOM(user, repo)
-        
     } catch (err) {
         console.error('Could not run for ', `${user}/${repo}`,
                       'Exception: ', err);
@@ -82,6 +78,6 @@ if (user, repo) {
     viewer = 'cg-cnu';
 
     if (user !== viewer){
-        runFor(viewer, repo);
+        getForks(viewer, repo);
     };
 }
