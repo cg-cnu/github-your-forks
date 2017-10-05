@@ -1,26 +1,22 @@
 
-let text;
+let forksContainer;
 
-function getForksElement(text) {
-    // Verify that the element exists and it's still valid
-    // otherwise, create it
-    if (document.body.contains(text)) {
-        return text;
+function getForksContainer(forksContainer) {
+    // if the element exists empty and return it
+    if (document.body.contains(forksContainer)) {
+        forksContainer.textContent = '';        
+        return forksContainer;
     }
 
-    // If the layout of the page changes, we'll have to change this location.
-    // We should make sure that we do not accidentally cause errors here.
+    // else create a new element and return it
     const repoName = document.querySelector('.repohead-details-container .public');
     if (repoName) {
         try {
-            text = document.createElement('span');
-            
-            // Stealing the styling from GitHub fork-info
-            text.classList.add('fork-flag', 'lovely-forks-addon');
+            forksContainer = document.createElement('span');
+            forksContainer.classList.add('fork-flag', 'lovely-forks-addon');
+            repoName.append(forksContainer);
+            return forksContainer;
 
-            repoName.append(text);
-
-            return text;
         } catch (err) {
             console.error( 'Error appending data to DOM', err);
         }
@@ -29,55 +25,53 @@ function getForksElement(text) {
     }
 }
 
-function emptyElem(elem) {
-    elem.textContent = '';
-}
+function createForkElement(user, repo) {
 
-function showDetails(user, repo, text) {
+    const forkElement = document.createElement('a');
 
-    const yourFork = document.createElement('a');
+    forkElement.href = `https://github.com/${user}/${repo}/`;
+    forkElement.append(`${user}/${repo}`);
 
-    yourFork.href = `https://github.com/${user}/${repo}/`;
-    yourFork.append(`${user}/${repo}`);
-
-    text.append('forked to ', yourFork )
+    return forkElement
 
 }
 
-function safeUpdateDOM(user, repo) {
-
-    // Get the stored version or create it if it doesn't exist
-    const text = getForksElement();
-    emptyElem(text);
-    showDetails(user, repo, text)
-}
-
-async function getForks(user, repo) {
+async function getForkUrl(user, repo) {
     try {
         const url = `https://github.com/${user}/${repo}/`
         response = await fetch(url)
         if (response.status !== 200){
-            return console.warn('Looks like something is wrong.');
+            console.warn('Looks like something is wrong.');
+            return;
         }
-        // update dom
-        safeUpdateDOM(user, repo)
+        return url;
     } catch (err) {
         console.error('Could not run for ', `${user}/${repo}`,
                       'Exception: ', err);
+        return;
     }
 }
 
-/* Script execution */
+async function main(user, repo){
+
+    // get current viewer name
+    viewer = document.querySelector('.css-truncate-target').innerText
+    // if user and viewer are same;
+    if (user !== viewer){
+        // get the fork url 
+        let forkUrl = await getForkUrl(viewer, repo);
+        if(forkUrl){
+            // get the fork element and container and add
+            let forkElement = createForkElement(viewer, repo)        
+            forksContainer = getForksContainer();
+            forksContainer.append('forked to ', forkElement )       
+        }
+    }
+}
 
 // get the user and repo
 const [ , user, repo] = window.location.pathname.split('/');
 
-if (user, repo) {
-    // TODO: get the current user ?
-    // take input from the user in the ui ?
-    viewer = 'cg-cnu';
-
-    if (user !== viewer){
-        getForks(viewer, repo);
-    };
+if( user, repo){
+    main(user, repo)
 }
