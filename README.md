@@ -11,8 +11,9 @@
 
 ## Description:
 
-Its a scratch-your-itch project. I find it really annoying to move between the repos and my forks.
-First chrome addon and learned a lot.
+Its a scratch-your-own-itch project. 
+
+I find it really annoying to move between the repos and my forks. So, built my first chrome addon.
 
 ## Inspiration:
 
