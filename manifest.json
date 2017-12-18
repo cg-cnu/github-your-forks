@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Show your forks of GitHub projects.",
-  "homepage_url": "https://github.com/cg-cnu/your-forks.git",
+  "homepage_url": "https://github.com/cg-cnu/github-your-forks.git",
   "icons": {
-    "128": "your_forks_128.png"
+    "128": "github_your_forks_128.png"
   },
   "browser_action": {
-    "default_icon": "your_forks_128.png"
+    "default_icon": "github_your_forks_128.png"
   },
   "permissions": [
     "*://github.com/*",
